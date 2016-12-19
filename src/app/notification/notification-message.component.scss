@@ -1,0 +1,62 @@
+@import '../../sass/utils/variables';
+@import '../../sass/utils/functions';
+@import '../../sass/utils/mixins';
+
+.notification-message {
+  @include type-setting(-1);
+
+  position: relative;
+  width: 17rem;
+  min-height: 3rem;
+  border-radius: .3rem;
+  margin-bottom: $base-line-height/2;
+  padding: $base-line-height/2;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  cursor: pointer;
+  user-select: none;
+
+  .title {
+    @include type-setting(0);
+  }
+
+  .title, .content {
+    padding-right: 3rem;
+  }
+
+  &.primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+  }
+
+  &.success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+
+  &.danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+  }
+
+  &.warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+  }
+}
+
+:host /deep/ .notification-message svg {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  padding: $base-line-height/2;
+  fill: #fff;
+}

@@ -1,0 +1,10 @@
+<div [@enterLeave]="animate"
+     (@enterLeave.done)="animationDone($event, message)"
+     (click)="onClick()"
+     (mouseenter)="onEnter()"
+     (mouseleave)="onLeave()"
+     class="notification-message {{message.type}}">
+    <div class="title">{{message.title}}</div>
+    <div class="content">{{message.content}}</div>
+    <div [innerHTML]="safeSvg"></div>
+</div>

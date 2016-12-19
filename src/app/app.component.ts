@@ -3,6 +3,8 @@
  */
 
 import { Component, OnInit } from "@angular/core";
+import { NotificationService } from "./notification/notification.service";
+//import { NotificationsService } from "./sn/notifications.service";
 
 import '../sass/main.scss';
 
@@ -14,33 +16,16 @@ import '../sass/main.scss';
 
 export class AppComponent implements OnInit {
 
-    private showDatePicker: boolean = false;
-    private showTimePicker: boolean = false;
-    private momentValue: Date;
+    private test = 1;
 
-    constructor() {
+    constructor( private notificationService: NotificationService ) {
     }
 
     ngOnInit(): void {
     }
 
-    setDate(date: any): void {
-        this.momentValue = date;
-        return;
-    }
-
-    setTime(time: any): void {
-        this.momentValue = time;
-        return;
-    }
-
-    toggleDatePicker(status: boolean): void {
-        this.showDatePicker = status;
-        return;
-    }
-
-    toggleTimePicker(status: boolean): void {
-        this.showTimePicker = status;
-        return;
+    add() {
+        this.notificationService.success('Angular Message:', 'Hello World ' + this.test);
+        this.test += 1;
     }
 }
