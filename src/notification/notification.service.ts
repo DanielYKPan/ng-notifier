@@ -7,7 +7,7 @@ import { Subject } from "rxjs";
 import { uuid } from "./uuid";
 import { ADD_MESSAGE, REMOVE_MESSAGE, REMOVE_ALL } from "./messages.reducer";
 import { INotificationEvent, IMessage } from "./notification.model";
-import {Icons, defaultIcons} from './icons';
+import { Icons, defaultIcons } from './icons';
 
 @Injectable()
 export class NotificationService {
@@ -23,8 +23,8 @@ export class NotificationService {
         return this.emitter;
     }
 
-    set( message: IMessage): IMessage {
-        if(!message.id) {
+    set( message: IMessage ): IMessage {
+        if (!message.id) {
             message.id = uuid();
         }
         this.emitter.next({command: ADD_MESSAGE, message: message});

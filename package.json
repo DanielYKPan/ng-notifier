@@ -20,6 +20,8 @@
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail"
   },
   "dependencies": {
+  },
+  "devDependencies": {
     "@angular/common": "~2.3.0",
     "@angular/compiler": "~2.3.0",
     "@angular/core": "~2.3.0",
@@ -32,9 +34,7 @@
     "@ngrx/store": "^2.2.1",
     "core-js": "^2.4.1",
     "rxjs": "5.0.0-rc.4",
-    "zone.js": "^0.7.2"
-  },
-  "devDependencies": {
+    "zone.js": "^0.7.2",
     "@types/jasmine": "^2.5.36",
     "@types/node": "^6.0.46",
     "@types/selenium-webdriver": "^2.53.33",

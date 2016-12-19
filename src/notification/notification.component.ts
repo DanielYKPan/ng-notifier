@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { NotificationService } from "./notification.service";
 import { IMessage } from "./notification.model";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs/Observable";
 
 // webpack1_
 declare let require: any;
