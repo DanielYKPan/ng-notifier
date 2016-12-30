@@ -1,5 +1,10 @@
-<div class="notification-wrapper">
-    <ng-notification-message *ngFor="let message of messages$ | async | max:5"
-                             [animate]="message.state"
+<div class="notification-wrapper"
+     [ngClass]="position">
+    <ng-notification-message *ngFor="let message of messages$ | async | max: maxStack"
+                             [animate]="animate"
+                             [theClass]="theClass"
+                             [timeDelay]="timeDelay"
+                             [clickToClose]="clickToClose"
+                             [pauseOnHover]="pauseOnHover"
                              [message]="message"></ng-notification-message>
 </div>

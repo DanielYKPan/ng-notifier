@@ -3,6 +3,7 @@
      (click)="onClick()"
      (mouseenter)="onEnter()"
      (mouseleave)="onLeave()"
+     [class]="theClass"
      class="notification-message {{message.type}}">
     <div class="title">{{message.title}}</div>
     <div class="content">{{message.content}}</div>

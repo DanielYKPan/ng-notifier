@@ -2,10 +2,10 @@
  * notification.component
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { NotificationService } from "./notification.service";
-import { IMessage } from "./notification.model";
+import { IMessage, IOptions } from "./notification.model";
 import { Observable } from "rxjs";
 
 // webpack1_
@@ -21,7 +21,19 @@ const myDpTpl: string = require("./notification.component.html");
 })
 export class NotificationComponent implements OnInit {
 
+    @Input() set options(opt: IOptions) {
+        this.attachPersonalOptions(opt);
+    }
+
     messages$: Observable<IMessage[]>;
+
+    private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
+    private clickToClose: boolean = true;
+    private pauseOnHover: boolean = true;
+    private position: ['top' | 'bottom', 'right' | 'left'] = ['bottom', 'right'];
+    private maxStack: number = 5;
+    private theClass: string = '';
+    private timeDelay: number = 0;
 
     constructor( private service: NotificationService, private store: Store<IMessage[]> ) {
         this.messages$ = store.select('messages');
@@ -36,4 +48,11 @@ export class NotificationComponent implements OnInit {
             );
     }
 
+    private attachPersonalOptions(options: any): void {
+        Object.keys(options).forEach(a => {
+            if (this.hasOwnProperty(a)) {
+                (<any>this)[a] = options[a];
+            }
+        });
+    }
 }

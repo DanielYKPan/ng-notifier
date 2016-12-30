@@ -36,7 +36,6 @@ export class NotificationService {
             title: title,
             content: content,
             type: 'primary',
-            state: 'fromRight',
             icon: this.icons.info,
         };
         return this.set(message);
@@ -47,7 +46,6 @@ export class NotificationService {
             title: title,
             content: content,
             type: 'success',
-            state: 'fromRight',
             icon: this.icons.success,
         };
         return this.set(message);
@@ -58,7 +56,6 @@ export class NotificationService {
             title: title,
             content: content,
             type: 'danger',
-            state: 'fromRight',
             icon: this.icons.error,
         };
         return this.set(message);
@@ -69,7 +66,6 @@ export class NotificationService {
             title: title,
             content: content,
             type: 'warning',
-            state: 'fromRight',
             icon: this.icons.alert,
         };
         return this.set(message);
