@@ -15,20 +15,36 @@ var NotificationComponent = (function () {
     function NotificationComponent(service, store) {
         this.service = service;
         this.store = store;
-        this.messages$ = store.select('messages');
     }
+    Object.defineProperty(NotificationComponent.prototype, "options", {
+        set: function (opt) {
+            this.service.attachPersonalOptions(opt);
+        },
+        enumerable: true,
+        configurable: true
+    });
     NotificationComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.messages$ = this.store.select('messages');
+        this.notifierOptions = this.service.getOptions();
         this.service.getEmitter()
             .subscribe(function (data) {
             _this.store.dispatch({ type: data.command, payload: data.message });
         });
     };
+    NotificationComponent.prototype.removeMessage = function (message) {
+        this.service.remove(message);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object), 
+        __metadata('design:paramtypes', [Object])
+    ], NotificationComponent.prototype, "options", null);
     NotificationComponent = __decorate([
         core_1.Component({
-            selector: 'ng-notification',
-            template: "<div class=\"notification-wrapper\"><ng-notification-message *ngFor=\"let message of messages$ | async | max:5\" [animate]=\"message.state\" [message]=\"message\"></ng-notification-message></div>",
-            styles: [".notification-wrapper{position:fixed;right:0;bottom:16px;bottom:1rem;margin-right:16px;margin-right:1rem}"],
+            selector: 'ng2-notifier',
+            template: "<div class=\"notification-wrapper\" [ngClass]=\"notifierOptions.position\"><ng2-notifier-message *ngFor=\"let message of messages$ | async | max: notifierOptions.maxStack\" [animate]=\"notifierOptions.animate\" [theClass]=\"notifierOptions.theClass\" [timeDelay]=\"notifierOptions.timeDelay\" [clickToClose]=\"notifierOptions.clickToClose\" [pauseOnHover]=\"notifierOptions.pauseOnHover\" [message]=\"message\" (onRemoveMessage)=\"removeMessage($event)\"></ng2-notifier-message></div>",
+            styles: [".notification-wrapper{position:fixed}.notification-wrapper.left{left:16px;left:1rem}.notification-wrapper.bottom{bottom:16px;bottom:1rem}.notification-wrapper.right{right:16px;right:1rem}.notification-wrapper.top{top:16px;top:1rem}"],
         }), 
         __metadata('design:paramtypes', [notification_service_1.NotificationService, store_1.Store])
     ], NotificationComponent);

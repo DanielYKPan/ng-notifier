@@ -4,9 +4,8 @@
 
 import {
     Component, OnInit, OnDestroy, Input, AnimationTransitionEvent, trigger, state,
-    transition, style, animate
+    transition, style, animate, Output, EventEmitter
 } from '@angular/core';
-import { NotificationService } from "./notification.service";
 import { IMessage } from "./notification.model";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
@@ -17,7 +16,7 @@ const myDpTpl: string = require("./notification-message.component.html");
 // webpack2_
 
 @Component({
-    selector: 'ng-notification-message',
+    selector: 'ng2-notifier-message',
     template: myDpTpl,
     styles: [myDpStyles],
     animations: [
@@ -80,13 +79,14 @@ export class NotificationMessageComponent implements OnInit, OnDestroy {
     @Input() theClass: string;
     @Input() timeDelay: number;
 
+    @Output() onRemoveMessage = new EventEmitter<IMessage>();
+
     private safeSvg: SafeHtml;
     private timerId: number = 0;
     private start: any;
     private timeLeft: any;
 
-    constructor( private notificationService: NotificationService,
-                 private domSanitizer: DomSanitizer ) {
+    constructor( private domSanitizer: DomSanitizer ) {
     }
 
     ngOnInit() {
@@ -104,7 +104,7 @@ export class NotificationMessageComponent implements OnInit, OnDestroy {
 
     animationDone( event: AnimationTransitionEvent, message: IMessage ): void {
         if (event.toState == message.state + 'Out') {
-            this.notificationService.remove(this.message);
+            this.onRemoveMessage.next(message);
         }
     }
 

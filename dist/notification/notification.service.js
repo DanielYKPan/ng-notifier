@@ -17,9 +17,21 @@ var NotificationService = (function () {
     function NotificationService() {
         this.emitter = new rxjs_1.Subject();
         this.icons = icons_1.defaultIcons;
+        this.options = {
+            animate: 'fromRight',
+            clickToClose: true,
+            pauseOnHover: true,
+            position: ['bottom', 'right'],
+            maxStack: 5,
+            theClass: '',
+            timeDelay: 0
+        };
     }
     NotificationService.prototype.getEmitter = function () {
         return this.emitter;
+    };
+    NotificationService.prototype.getOptions = function () {
+        return this.options;
     };
     NotificationService.prototype.set = function (message) {
         if (!message.id) {
@@ -28,19 +40,53 @@ var NotificationService = (function () {
         this.emitter.next({ command: messages_reducer_1.ADD_MESSAGE, message: message });
         return message;
     };
-    NotificationService.prototype.success = function (title, content) {
+    NotificationService.prototype.info = function (content, title) {
+        var message = {
+            title: title,
+            content: content,
+            type: 'primary',
+            icon: this.icons.info,
+        };
+        return this.set(message);
+    };
+    NotificationService.prototype.success = function (content, title) {
         var message = {
             title: title,
             content: content,
             type: 'success',
-            state: 'fromRight',
             icon: this.icons.success,
+        };
+        return this.set(message);
+    };
+    NotificationService.prototype.error = function (content, title) {
+        var message = {
+            title: title,
+            content: content,
+            type: 'danger',
+            icon: this.icons.error,
+        };
+        return this.set(message);
+    };
+    NotificationService.prototype.alert = function (content, title) {
+        var message = {
+            title: title,
+            content: content,
+            type: 'warning',
+            icon: this.icons.alert,
         };
         return this.set(message);
     };
     NotificationService.prototype.remove = function (message) {
         message ? this.emitter.next({ command: messages_reducer_1.REMOVE_MESSAGE, message: message }) :
             this.emitter.next({ command: messages_reducer_1.REMOVE_ALL });
+    };
+    NotificationService.prototype.attachPersonalOptions = function (options) {
+        var _this = this;
+        Object.keys(options).forEach(function (o) {
+            if (_this.options.hasOwnProperty(o)) {
+                _this.options[o] = options[o];
+            }
+        });
     };
     NotificationService = __decorate([
         core_1.Injectable(), 

@@ -1,18 +1,20 @@
-import { OnInit, OnDestroy, AnimationTransitionEvent } from '@angular/core';
-import { NotificationService } from "./notification.service";
+import { OnInit, OnDestroy, AnimationTransitionEvent, EventEmitter } from '@angular/core';
 import { IMessage } from "./notification.model";
 import { DomSanitizer } from "@angular/platform-browser";
 export declare class NotificationMessageComponent implements OnInit, OnDestroy {
-    private notificationService;
     private domSanitizer;
     message: IMessage;
     animate: string;
+    clickToClose: boolean;
+    pauseOnHover: boolean;
+    theClass: string;
+    timeDelay: number;
+    onRemoveMessage: EventEmitter<IMessage>;
     private safeSvg;
     private timerId;
-    private timeDelay;
     private start;
     private timeLeft;
-    constructor(notificationService: NotificationService, domSanitizer: DomSanitizer);
+    constructor(domSanitizer: DomSanitizer);
     ngOnInit(): void;
     ngOnDestroy(): void;
     animationDone(event: AnimationTransitionEvent, message: IMessage): void;
