@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     private test = 1;
     private options:IOptions = {
         animate: 'scale',
-        clickToClose: false,
+        clickToClose: true,
         maxStack: 5,
         pauseOnHover: false,
         position: ['bottom', 'right'],
