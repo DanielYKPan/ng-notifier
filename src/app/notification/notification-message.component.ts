@@ -41,7 +41,7 @@ export class NotificationMessageComponent implements OnInit, OnDestroy {
 
     private safeSvg: SafeHtml;
     private timerId: number = 0;
-    private timeDelay: number = 3000;
+    private timeDelay: number = 300000;
     private start: any;
     private timeLeft: any;
 

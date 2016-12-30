@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     add() {
-        this.notificationService.success('Angular Message:', 'Hello World ' + this.test);
+        this.notificationService.success('Hello World ' + this.test, 'Angular Message:');
         this.test += 1;
     }
 }
