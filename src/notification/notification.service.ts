@@ -31,13 +31,42 @@ export class NotificationService {
         return message;
     }
 
-    success( title: string, content: string ) {
+    info( content: string, title?: string ) {
+        let message = {
+            title: title,
+            content: content,
+            type: 'primary',
+            icon: this.icons.info,
+        };
+        return this.set(message);
+    }
+
+    success( content: string, title?: string ) {
         let message = {
             title: title,
             content: content,
             type: 'success',
-            state: 'fromRight',
             icon: this.icons.success,
+        };
+        return this.set(message);
+    }
+
+    error( content: string, title?: string ) {
+        let message = {
+            title: title,
+            content: content,
+            type: 'danger',
+            icon: this.icons.error,
+        };
+        return this.set(message);
+    }
+
+    alert( content: string, title?: string ) {
+        let message = {
+            title: title,
+            content: content,
+            type: 'warning',
+            icon: this.icons.alert,
         };
         return this.set(message);
     }
