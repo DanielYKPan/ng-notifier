@@ -32,7 +32,6 @@ var NotificationModule = (function () {
                 notification_message_component_1.NotificationMessageComponent,
                 max_pipe_1.MaxPipe
             ],
-            exports: [notification_component_1.NotificationComponent],
             providers: [notification_service_1.NotificationService]
         }), 
         __metadata('design:paramtypes', [])
