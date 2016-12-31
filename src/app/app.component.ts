@@ -5,7 +5,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import '../sass/main.scss';
-import { NotificationService } from 'ng2-yk-notifier/src/notification/notification.service';
+import { NotificationService } from 'ng2-yk-notifier';
 
 @Component({
     selector: 'yk-app',

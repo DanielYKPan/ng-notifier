@@ -1,6 +1,6 @@
 {
   "name": "ng2-yk-notifier-demo",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.2",
   "description": "Angular2 Notification Component",
   "keywords": [
     "Angular2",
@@ -33,7 +33,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "core-js": "^2.4.1",
-    "ng2-yk-notifier": "^1.0.0-beta.0",
+    "ng2-yk-notifier": "^1.0.0-beta.2",
     "rxjs": "5.0.0-rc.4",
     "zone.js": "^0.7.2"
   },
