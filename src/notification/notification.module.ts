@@ -24,6 +24,9 @@ import { MaxPipe } from "./max.pipe";
         NotificationMessageComponent,
         MaxPipe
     ],
+    exports: [
+        NotificationComponent
+    ],
     providers: [NotificationService]
 })
 export class NotificationModule {
