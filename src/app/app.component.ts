@@ -5,7 +5,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import '../sass/main.scss';
-import { NotificationService } from 'ng2-yk-notifier';
+import { NotifierService } from 'ng2-yk-notifier';
 
 @Component({
     selector: 'yk-app',
@@ -15,7 +15,7 @@ import { NotificationService } from 'ng2-yk-notifier';
 
 export class AppComponent implements OnInit {
 
-    constructor( private service: NotificationService ) {
+    constructor( private service: NotifierService ) {
     }
 
     ngOnInit(): void {
