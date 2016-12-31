@@ -1,0 +1,19 @@
+.notifier-wrapper {
+  position: fixed;
+
+  &.left {
+    left: 1rem;
+  }
+
+  &.bottom {
+    bottom: 1rem;
+  }
+
+  &.right {
+    right: 1rem;
+  }
+
+  &.top {
+    top: 1rem;
+  }
+}
