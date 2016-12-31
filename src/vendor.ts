@@ -11,8 +11,6 @@ import '@angular/http';
 import '@angular/router';
 
 // ngrx
-import '@ngrx/core';
-import '@ngrx/store';
 
 // RxJS
 import 'rxjs';
