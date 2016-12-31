@@ -4,14 +4,14 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { NotificationService } from "./notification.service";
-import { IMessage, IOptions } from "./notification.model";
+import { NotifierService } from "./notifier.service";
+import { INotifierMessage, INotifierOptions } from "./notifier.model";
 import { Observable } from "rxjs";
 
 // webpack1_
 declare let require: any;
-const myDpStyles: string = require("./notification.component.scss");
-const myDpTpl: string = require("./notification.component.html");
+const myDpStyles: string = require("./notifier.component.scss");
+const myDpTpl: string = require("./notifier.component.html");
 // webpack2_
 
 @Component({
@@ -19,17 +19,17 @@ const myDpTpl: string = require("./notification.component.html");
     template: myDpTpl,
     styles: [myDpStyles],
 })
-export class NotificationComponent implements OnInit {
+export class NotifierComponent implements OnInit {
 
-    @Input() set options( opt: IOptions ) {
+    @Input() set options( opt: INotifierOptions ) {
         this.service.attachPersonalOptions(opt);
     }
 
-    private messages$: Observable<IMessage[]>;
-    private notifierOptions: IOptions;
+    private messages$: Observable<INotifierMessage[]>;
+    private notifierOptions: INotifierOptions;
 
-    constructor( private service: NotificationService,
-                 private store: Store<IMessage[]> ) {
+    constructor( private service: NotifierService,
+                 private store: Store<INotifierMessage[]> ) {
     }
 
     ngOnInit() {
@@ -43,7 +43,7 @@ export class NotificationComponent implements OnInit {
             );
     }
 
-    removeMessage( message: IMessage ): void {
+    removeMessage( message: INotifierMessage ): void {
         this.service.remove(message);
     }
 }

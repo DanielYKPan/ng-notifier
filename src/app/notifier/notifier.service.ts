@@ -6,17 +6,17 @@ import { Injectable } from '@angular/core';
 import { Subject } from "rxjs";
 import { uuid } from "./uuid";
 import { ADD_MESSAGE, REMOVE_MESSAGE, REMOVE_ALL } from "./messages.reducer";
-import { INotificationEvent, IMessage, IOptions } from "./notification.model";
+import { INotifierEvent, INotifierMessage, INotifierOptions } from "./notifier.model";
 import { Icons, defaultIcons } from './icons';
 
 @Injectable()
-export class NotificationService {
+export class NotifierService {
 
-    private emitter: Subject<INotificationEvent> = new Subject<INotificationEvent>();
+    private emitter: Subject<INotifierEvent> = new Subject<INotifierEvent>();
 
     private icons: Icons = defaultIcons;
 
-    private options: IOptions = {
+    private options: INotifierOptions = {
         animate: 'fromRight',
         clickToClose: true,
         pauseOnHover: true,
@@ -29,15 +29,15 @@ export class NotificationService {
     constructor() {
     }
 
-    getEmitter(): Subject<INotificationEvent> {
+    getEmitter(): Subject<INotifierEvent> {
         return this.emitter;
     }
 
-    getOptions(): IOptions {
+    getOptions(): INotifierOptions {
         return this.options;
     }
 
-    set( message: IMessage ): IMessage {
+    set( message: INotifierMessage ): INotifierMessage {
         if (!message.id) {
             message.id = uuid();
         }
@@ -85,7 +85,7 @@ export class NotificationService {
         return this.set(message);
     }
 
-    remove( message?: IMessage ) {
+    remove( message?: INotifierMessage ) {
         message ? this.emitter.next({command: REMOVE_MESSAGE, message: message}) :
             this.emitter.next({command: REMOVE_ALL});
     }

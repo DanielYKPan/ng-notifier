@@ -3,11 +3,10 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { NotificationService } from "./notification/notification.service";
-//import { NotificationsService } from "./sn/notifications.service";
+import { NotifierService } from "./notifier/notifier.service";
 
 import '../sass/main.scss';
-import { IOptions } from "./notification/notification.model";
+import { INotifierOptions } from "./notifier/notifier.model";
 
 @Component({
     selector: 'yk-app',
@@ -18,7 +17,7 @@ import { IOptions } from "./notification/notification.model";
 export class AppComponent implements OnInit {
 
     private test = 1;
-    private options:IOptions = {
+    private options:INotifierOptions = {
         animate: 'scale',
         clickToClose: true,
         maxStack: 5,
@@ -28,14 +27,14 @@ export class AppComponent implements OnInit {
         timeDelay: 3000
     };
 
-    constructor( private notificationService: NotificationService ) {
+    constructor( private notifierService: NotifierService ) {
     }
 
     ngOnInit(): void {
     }
 
     add() {
-        this.notificationService.success('Hello World ' + this.test, 'Angular Message:');
+        this.notifierService.success('Hello World ' + this.test, 'Angular Message:');
         this.test += 1;
     }
 }

@@ -6,12 +6,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
-import { NotificationComponent } from "./notification/notification.component";
+import { NotifierComponent } from "./notifier/notifier.component";
 import { StoreModule } from "@ngrx/store";
-import { messagesReducer } from "./notification/messages.reducer";
-import { NotificationMessageComponent } from "./notification/notification-message.component";
-import { NotificationService } from "./notification/notification.service";
-import { MaxPipe } from "./notification/max.pipe";
+import { messagesReducer } from "./notifier/messages.reducer";
+import { NotifierMessageComponent } from "./notifier/notifier-message.component";
+import { NotifierService } from "./notifier/notifier.service";
+import { MaxPipe } from "./notifier/max.pipe";
 
 @NgModule({
     imports: [
@@ -21,12 +21,12 @@ import { MaxPipe } from "./notification/max.pipe";
     ],
     declarations: [
         AppComponent,
-        NotificationComponent,
-        NotificationMessageComponent,
+        NotifierComponent,
+        NotifierMessageComponent,
         MaxPipe
     ],
     bootstrap: [AppComponent],
-    providers: [NotificationService]
+    providers: [NotifierService]
 })
 export class AppModule {
 }

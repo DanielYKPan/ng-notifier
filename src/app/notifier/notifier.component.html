@@ -1,4 +1,4 @@
-<div class="notification-wrapper"
+<div class="notifier-wrapper"
      [ngClass]="notifierOptions.position">
     <ng2-notifier-message *ngFor="let message of messages$ | async | max: notifierOptions.maxStack"
                           [animate]="notifierOptions.animate"

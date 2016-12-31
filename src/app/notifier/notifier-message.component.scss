@@ -2,7 +2,7 @@
 @import '../../sass/utils/functions';
 @import '../../sass/utils/mixins';
 
-.notification-message {
+.notifier-message {
   @include type-setting(-1);
 
   position: relative;
@@ -50,7 +50,7 @@
   }
 }
 
-:host /deep/ .notification-message svg {
+:host /deep/ .notifier-message svg {
   position: absolute;
   box-sizing: border-box;
   top: 0;

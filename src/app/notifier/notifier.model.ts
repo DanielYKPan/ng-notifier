@@ -2,7 +2,7 @@
  * notification.model
  */
 
-export interface IMessage {
+export interface INotifierMessage {
     id?: string;
     type: string;
     title?: string;
@@ -11,12 +11,12 @@ export interface IMessage {
     state?: string;
 }
 
-export interface INotificationEvent {
+export interface INotifierEvent {
     command: string;
-    message?: IMessage;
+    message?: INotifierMessage;
 }
 
-export  interface IOptions {
+export  interface INotifierOptions {
     animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale';
     clickToClose?: boolean;
     maxStack?: number;

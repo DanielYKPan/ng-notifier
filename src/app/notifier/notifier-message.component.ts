@@ -6,13 +6,13 @@ import {
     Component, OnInit, OnDestroy, Input, AnimationTransitionEvent, trigger, state,
     transition, style, animate, Output, EventEmitter
 } from '@angular/core';
-import { IMessage } from "./notification.model";
+import { INotifierMessage } from "./notifier.model";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 // webpack1_
 declare let require: any;
-const myDpStyles: string = require("./notification-message.component.scss");
-const myDpTpl: string = require("./notification-message.component.html");
+const myDpStyles: string = require("./notifier-message.component.scss");
+const myDpTpl: string = require("./notifier-message.component.html");
 // webpack2_
 
 @Component({
@@ -70,16 +70,16 @@ const myDpTpl: string = require("./notification-message.component.html");
         ])
     ]
 })
-export class NotificationMessageComponent implements OnInit, OnDestroy {
+export class NotifierMessageComponent implements OnInit, OnDestroy {
 
-    @Input() message: IMessage;
+    @Input() message: INotifierMessage;
     @Input() animate: string;
     @Input() clickToClose: boolean;
     @Input() pauseOnHover: boolean;
     @Input() theClass: string;
     @Input() timeDelay: number;
 
-    @Output() onRemoveMessage = new EventEmitter<IMessage>();
+    @Output() onRemoveMessage = new EventEmitter<INotifierMessage>();
 
     private safeSvg: SafeHtml;
     private timerId: number = 0;
@@ -102,7 +102,7 @@ export class NotificationMessageComponent implements OnInit, OnDestroy {
         this.clearTimer();
     }
 
-    animationDone( event: AnimationTransitionEvent, message: IMessage ): void {
+    animationDone( event: AnimationTransitionEvent, message: INotifierMessage ): void {
         if (event.toState == message.state + 'Out') {
             this.onRemoveMessage.next(message);
         }
