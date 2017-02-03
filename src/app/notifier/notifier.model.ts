@@ -21,7 +21,7 @@ export  interface INotifierOptions {
     clickToClose?: boolean;
     maxStack?: number;
     pauseOnHover?: boolean;
-    position?: ['top' | 'bottom', 'right' | 'left'];
+    position?: ['top' | 'bottom', 'right' | 'left' | 'center'];
     timeDelay?: number;
     theClass?: string;
 }

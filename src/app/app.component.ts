@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
         clickToClose: true,
         maxStack: 5,
         pauseOnHover: false,
-        position: ['bottom', 'right'],
+        position: ['bottom', 'center'],
         theClass: 'good bad hello world',
         timeDelay: 3000
     };
