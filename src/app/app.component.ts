@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
     private test = 1;
     private options:INotifierOptions = {
-        animate: 'scale',
+        animate: 'fade',
         clickToClose: true,
         maxStack: 5,
         pauseOnHover: false,

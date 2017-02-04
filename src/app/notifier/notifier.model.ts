@@ -17,7 +17,7 @@ export interface INotifierEvent {
 }
 
 export  interface INotifierOptions {
-    animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale';
+    animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade';
     clickToClose?: boolean;
     maxStack?: number;
     pauseOnHover?: boolean;

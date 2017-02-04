@@ -66,6 +66,18 @@ const myDpTpl: string = require("./notifier-message.component.html");
             transition('rotate => rotateOut', [
                 style({opacity: 1, transform: 'rotate(0deg)'}),
                 animate('400ms ease-in-out')
+            ]),
+
+            // Fade
+            state('fade', style({opacity: 1})),
+            state('fadeOut', style({opacity: 0})),
+            transition('* => fade', [
+                style({opacity: 0}),
+                animate('400ms ease-in-out')
+            ]),
+            transition('fade => fadeOut', [
+                style({opacity: 1}),
+                animate('400ms ease-in-out')
             ])
         ])
     ]
