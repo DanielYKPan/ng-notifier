@@ -17,7 +17,7 @@ import { INotifierOptions } from "./notifier/notifier.model";
 export class AppComponent implements OnInit {
 
     private test = 1;
-    private options:INotifierOptions = {
+    options:INotifierOptions = {
         animate: 'fade',
         clickToClose: true,
         maxStack: 5,
