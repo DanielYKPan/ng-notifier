@@ -16,4 +16,9 @@
   &.top {
     top: 1rem;
   }
+
+  &.center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

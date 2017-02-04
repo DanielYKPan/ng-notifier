@@ -140,6 +140,16 @@ var NotifierMessageComponent = (function () {
                     core_1.transition('rotate => rotateOut', [
                         core_1.style({ opacity: 1, transform: 'rotate(0deg)' }),
                         core_1.animate('400ms ease-in-out')
+                    ]),
+                    core_1.state('fade', core_1.style({ opacity: 1 })),
+                    core_1.state('fadeOut', core_1.style({ opacity: 0 })),
+                    core_1.transition('* => fade', [
+                        core_1.style({ opacity: 0 }),
+                        core_1.animate('400ms ease-in-out')
+                    ]),
+                    core_1.transition('fade => fadeOut', [
+                        core_1.style({ opacity: 1 }),
+                        core_1.animate('400ms ease-in-out')
                     ])
                 ])
             ]

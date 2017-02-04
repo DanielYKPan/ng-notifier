@@ -44,7 +44,7 @@ var NotifierComponent = (function () {
         core_1.Component({
             selector: 'ng2-notifier',
             template: "<div class=\"notifier-wrapper\" [ngClass]=\"notifierOptions.position\"><ng2-notifier-message *ngFor=\"let message of messages$ | async | max: notifierOptions.maxStack\" [animate]=\"notifierOptions.animate\" [theClass]=\"notifierOptions.theClass\" [timeDelay]=\"notifierOptions.timeDelay\" [clickToClose]=\"notifierOptions.clickToClose\" [pauseOnHover]=\"notifierOptions.pauseOnHover\" [message]=\"message\" (onRemoveMessage)=\"removeMessage($event)\"></ng2-notifier-message></div>",
-            styles: [".notifier-wrapper{position:fixed}.notifier-wrapper.left{left:16px;left:1rem}.notifier-wrapper.bottom{bottom:16px;bottom:1rem}.notifier-wrapper.right{right:16px;right:1rem}.notifier-wrapper.top{top:16px;top:1rem}"],
+            styles: [".notifier-wrapper{position:fixed}.notifier-wrapper.left{left:16px;left:1rem}.notifier-wrapper.bottom{bottom:16px;bottom:1rem}.notifier-wrapper.right{right:16px;right:1rem}.notifier-wrapper.top{top:16px;top:1rem}.notifier-wrapper.center{left:50%;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}"],
         }), 
         __metadata('design:paramtypes', [notifier_service_1.NotifierService, store_1.Store])
     ], NotifierComponent);
