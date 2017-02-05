@@ -24,4 +24,5 @@ export  interface INotifierOptions {
     position?: ['top' | 'bottom', 'right' | 'left' | 'center'];
     timeDelay?: number;
     theClass?: string;
+    showProcess?: boolean;
 }

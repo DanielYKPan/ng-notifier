@@ -14,7 +14,7 @@
   color: #333;
   background-color: #fff;
   border-color: #ccc;
-  box-shadow: 0 0 8px 3px rgba(255,254,247,0.75);
+  box-shadow: 0 0 8px 3px rgba(255, 254, 247, 0.75);
   cursor: pointer;
   user-select: none;
 
@@ -60,4 +60,22 @@
   height: 3rem;
   padding: $base-line-height/2;
   fill: #fff;
+}
+
+.timer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: .3rem;
+
+  .bar {
+    display: block;
+    position: relative;
+    height: 100%;
+    border-radius: .3rem;
+    background: rgba(0, 0, 0, .3);
+    transition: width 100ms ease;
+  }
 }

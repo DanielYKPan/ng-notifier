@@ -17,14 +17,14 @@ import { INotifierOptions } from "./notifier/notifier.model";
 export class AppComponent implements OnInit {
 
     private test = 1;
-    options:INotifierOptions = {
+    options: INotifierOptions = {
         animate: 'fade',
         clickToClose: true,
         maxStack: 5,
-        pauseOnHover: false,
+        pauseOnHover: true,
         position: ['bottom', 'center'],
         theClass: 'good bad hello world',
-        timeDelay: 3000
+        timeDelay: 3000,
     };
 
     constructor( private notifierService: NotifierService ) {

@@ -23,7 +23,8 @@ export class NotifierService {
         position: ['bottom', 'right'],
         maxStack: 5,
         theClass: '',
-        timeDelay: 0
+        timeDelay: 0,
+        showProcess: true
     };
 
     constructor() {

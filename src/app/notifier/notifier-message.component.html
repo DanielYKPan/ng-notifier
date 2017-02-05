@@ -5,6 +5,9 @@
      (mouseleave)="onLeave()"
      [class]="theClass"
      class="notifier-message {{message.type}}">
+    <div class="timer" *ngIf="showProcess">
+        <div class="bar" [style.width]="getPercentage()"></div>
+    </div>
     <div class="title">{{message.title}}</div>
     <div class="content">{{message.content}}</div>
     <div [innerHTML]="safeSvg"></div>

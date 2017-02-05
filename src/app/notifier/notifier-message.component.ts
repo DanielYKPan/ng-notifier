@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { INotifierMessage } from "./notifier.model";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { Timer } from "./timer";
 
 // webpack1_
 declare let require: any;
@@ -90,13 +91,15 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
     @Input() pauseOnHover: boolean;
     @Input() theClass: string;
     @Input() timeDelay: number;
+    @Input() showProcess: boolean;
 
     @Output() onRemoveMessage = new EventEmitter<INotifierMessage>();
 
     private safeSvg: SafeHtml;
     private timerId: number = 0;
-    private start: any;
-    private timeLeft: any;
+    private start: number;
+    private timeLeft: number;
+    private timer: Timer;
 
     constructor( private domSanitizer: DomSanitizer ) {
     }
@@ -106,6 +109,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         this.message.state = this.animate;
 
         if (this.timeDelay > 0) {
+            this.timer = new Timer(this.timeDelay/1000, this.timeDelay/1000);
             this.startTimer();
         }
     }
@@ -122,8 +126,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
 
     onEnter(): void {
         if (this.pauseOnHover) {
-            this.timeLeft = this.timeDelay;
-            this.timeLeft -= new Date().getTime() - this.start;
+            this.timeLeft = this.timer.Current;
             this.clearTimer();
         }
     }
@@ -131,11 +134,19 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
     onLeave(): void {
         if (this.pauseOnHover) {
             if (!this.timeLeft) {
-                this.timeLeft = this.timeDelay;
+                return;
             }
-            this.timerId = window.setTimeout(() => {
-                this.setStateOut();
-            }, this.timeLeft);
+
+            this.start = new Date().getTime();
+            this.timerId = window.setInterval(() => {
+                let current_time = new Date().getTime();
+                this.timer.Current = this.timeLeft - ((current_time - this.start) / 1000);
+                if (this.timer.Current <= 0) {
+                    this.timer.Current = 0;
+                    this.setStateOut();
+                    this.clearTimer();
+                }
+            }, 100);
         }
     }
 
@@ -145,11 +156,26 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         }
     }
 
+    getPercentage(): string {
+        if (this.timer != null) {
+            return (this.timer.Current/ this.timer.Max) * 100 + "%";
+        }
+        else {
+            return "100%";
+        }
+    }
+
     private startTimer(): void {
         this.start = new Date().getTime();
-        this.timerId = window.setTimeout(() => {
-            this.setStateOut();
-        }, this.timeDelay);
+        this.timerId = window.setInterval(() => {
+            let current_time = new Date().getTime();
+            this.timer.Current = this.timer.Max - ((current_time - this.start) / 1000);
+            if (this.timer.Current <= 0) {
+                this.timer.Current = 0;
+                this.setStateOut();
+                this.clearTimer();
+            }
+        }, 100);
     }
 
     private clearTimer(): void {
