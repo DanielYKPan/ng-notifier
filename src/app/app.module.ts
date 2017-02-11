@@ -12,7 +12,9 @@ import { NotifierModule } from 'ng2-yk-notifier';
     imports: [
         BrowserModule,
         FormsModule,
-        NotifierModule
+        NotifierModule.forRoot({
+            timeDelay: 2000
+        })
     ],
     declarations: [
         AppComponent

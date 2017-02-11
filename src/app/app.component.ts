@@ -2,7 +2,7 @@
  * app.component
  */
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 
 import '../sass/main.scss';
 import { NotifierService } from 'ng2-yk-notifier';
@@ -15,10 +15,12 @@ import { NotifierService } from 'ng2-yk-notifier';
 
 export class AppComponent implements OnInit {
 
-    constructor( private service: NotifierService ) {
+    constructor(private vRef: ViewContainerRef,
+                private service: NotifierService ) {
     }
 
     ngOnInit(): void {
+        this.service.setRootViewContainerRef(this.vRef);
     }
 
     add() {
