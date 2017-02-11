@@ -4,8 +4,8 @@
 
 import { Component, OnInit, OnDestroy, Optional } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { INotifierMessage } from "./notifier.model";
-import { ADD_MESSAGE, REMOVE_MESSAGE, REMOVE_ALL } from "./messages.reducer";
+import { INotice } from "./notifier-notice";
+import { ADD_NOTICE, REMOVE_NOTICE, REMOVE_ALL } from "./messages.reducer";
 import { Subscription } from "rxjs";
 import { NotifierOptions } from "./notifier-options.service";
 
@@ -23,7 +23,7 @@ const myDpTpl: string = require("./notifier-container.component.html");
 
 export class NotifierContainerComponent implements OnInit, OnDestroy {
 
-    notices: INotifierMessage[];
+    notices: INotice[];
     animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade' = 'fromRight';
     clickToClose: boolean = true;
     maxStack: number = 5;
@@ -35,7 +35,7 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
     private selectNoticesSub: Subscription;
 
 
-    constructor( private store: Store<INotifierMessage[]>,
+    constructor( private store: Store<INotice[]>,
                  @Optional() options: NotifierOptions ) {
         if (options) {
             Object.assign(this, options);
@@ -44,7 +44,7 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.selectNoticesSub = this.store.select('messages').subscribe(
-            ( data: INotifierMessage[] ) => this.notices = data
+            ( data: INotice[] ) => this.notices = data
         );
     }
 
@@ -52,13 +52,13 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
         this.selectNoticesSub.unsubscribe();
     }
 
-    addNotice( notice: INotifierMessage ): void {
-        this.store.dispatch({type: ADD_MESSAGE, payload: notice});
+    addNotice( notice: INotice ): void {
+        this.store.dispatch({type: ADD_NOTICE, payload: notice});
     }
 
-    removeNotice( notice?: INotifierMessage ): void {
+    removeNotice( notice?: INotice ): void {
         if (notice) {
-            this.store.dispatch({type: REMOVE_MESSAGE, payload: notice});
+            this.store.dispatch({type: REMOVE_NOTICE, payload: notice});
         } else {
             this.store.dispatch({type: REMOVE_ALL});
         }

@@ -6,7 +6,7 @@ import {
     Component, OnInit, OnDestroy, Input, AnimationTransitionEvent, trigger, state,
     transition, style, animate
 } from '@angular/core';
-import { INotifierMessage } from "./notifier.model";
+import { INotice } from "./notifier-notice";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { NotifierService } from "./notifier.service";
 
@@ -85,7 +85,7 @@ const myDpTpl: string = require("./notifier-message.component.html");
 })
 export class NotifierMessageComponent implements OnInit, OnDestroy {
 
-    @Input() message: INotifierMessage;
+    @Input() message: INotice;
     @Input() animate: string;
     @Input() clickToClose: boolean;
     @Input() pauseOnHover: boolean;
@@ -114,7 +114,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         this.clearTimer();
     }
 
-    animationDone( event: AnimationTransitionEvent, message: INotifierMessage ): void {
+    animationDone( event: AnimationTransitionEvent, message: INotice ): void {
         if (event.toState == message.state + 'Out') {
             this.notifierService.clear(message);
         }

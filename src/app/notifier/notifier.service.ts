@@ -12,7 +12,7 @@ import {
     ReflectiveInjector
 } from '@angular/core';
 import { uuid } from "./uuid";
-import { INotifierMessage } from "./notifier.model";
+import { INotice } from "./notifier-notice";
 import { Icons, defaultIcons } from './icons';
 import { NotifierOptions } from "./notifier-options.service";
 import { NotifierContainerComponent } from "./notifier-container.component";
@@ -38,7 +38,7 @@ export class NotifierService {
         this._rootViewContainerRef = vRef;
     }
 
-    set( message: INotifierMessage ): INotifierMessage {
+    set( message: INotice ): INotice {
 
         if (!this.container) {
             // get app root view component ref
@@ -75,7 +75,7 @@ export class NotifierService {
         return;
     }
 
-    clear( notice?: INotifierMessage ): void {
+    clear( notice?: INotice ): void {
         if (!this.container) return;
         this.container.instance.removeNotice(notice);
         if(!this.container.instance.anyNotices()){

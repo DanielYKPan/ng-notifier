@@ -2,7 +2,7 @@
  * notification.model
  */
 
-export interface INotifierMessage {
+export interface INotice {
     id?: string;
     type: string;
     title?: string;
