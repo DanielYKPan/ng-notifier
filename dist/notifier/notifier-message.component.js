@@ -10,10 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
+var notifier_service_1 = require("./notifier.service");
 var NotifierMessageComponent = (function () {
-    function NotifierMessageComponent(domSanitizer) {
+    function NotifierMessageComponent(domSanitizer, notifierService) {
         this.domSanitizer = domSanitizer;
-        this.onRemoveMessage = new core_1.EventEmitter();
+        this.notifierService = notifierService;
         this.timerId = 0;
     }
     NotifierMessageComponent.prototype.ngOnInit = function () {
@@ -28,7 +29,7 @@ var NotifierMessageComponent = (function () {
     };
     NotifierMessageComponent.prototype.animationDone = function (event, message) {
         if (event.toState == message.state + 'Out') {
-            this.onRemoveMessage.next(message);
+            this.notifierService.clear(message);
         }
     };
     NotifierMessageComponent.prototype.onEnter = function () {
@@ -92,15 +93,11 @@ var NotifierMessageComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Number)
     ], NotifierMessageComponent.prototype, "timeDelay", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], NotifierMessageComponent.prototype, "onRemoveMessage", void 0);
     NotifierMessageComponent = __decorate([
         core_1.Component({
             selector: 'ng2-notifier-message',
-            template: "<div [@enterLeave]=\"animate\" (@enterLeave.done)=\"animationDone($event, message)\" (click)=\"onClick()\" (mouseenter)=\"onEnter()\" (mouseleave)=\"onLeave()\" [class]=\"theClass\" class=\"notifier-message {{message.type}}\"><div class=\"title\">{{message.title}}</div><div class=\"content\">{{message.content}}</div><div [innerHTML]=\"safeSvg\"></div></div>",
-            styles: [".notifier-message{font-size:12px;font-size:.75rem;line-height:20px;line-height:1.25rem;position:relative;width:272px;width:17rem;min-height:48px;min-height:3rem;-moz-border-radius:.3rem;border-radius:.3rem;margin-bottom:10px;margin-bottom:.625rem;padding:10px;padding:.625rem;color:#333;background-color:#fff;border-color:#ccc;-moz-box-shadow:0 0 8px 3px rgba(255,254,247,.75);box-shadow:0 0 8px 3px rgba(255,254,247,.75);cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.notifier-message .title{font-size:16px;font-size:1rem;line-height:20px;line-height:1.25rem}.notifier-message .content,.notifier-message .title{padding-right:48px;padding-right:3rem}.notifier-message.primary{color:#fff;background-color:#337ab7;border-color:#2e6da4}.notifier-message.success{color:#fff;background-color:#5cb85c;border-color:#4cae4c}.notifier-message.danger{color:#fff;background-color:#d9534f;border-color:#d43f3a}.notifier-message.warning{color:#fff;background-color:#f0ad4e;border-color:#eea236}:host /deep/ .notifier-message svg{position:absolute;-moz-box-sizing:border-box;box-sizing:border-box;top:0;right:0;width:48px;width:3rem;height:48px;height:3rem;padding:10px;padding:.625rem;fill:#fff}"],
+            template: "<div [@enterLeave]=\"animate\" (@enterLeave.done)=\"animationDone($event, message)\" (click)=\"onClick()\" (mouseenter)=\"onEnter()\" (mouseleave)=\"onLeave()\" [class]=\"theClass\" class=\"notifier-message {{message.type}}\"><div class=\"timer\" *ngIf=\"showProcess\"><div class=\"bar\" [style.width]=\"getPercentage()\"></div></div><div class=\"title\">{{message.title}}</div><div class=\"content\">{{message.content}}</div><div [innerHTML]=\"safeSvg\"></div></div>",
+            styles: [".notifier-message,.timer{-moz-border-radius:.3rem}.notifier-message{font-size:12px;font-size:.75rem;line-height:20px;line-height:1.25rem;position:relative;width:272px;width:17rem;min-height:48px;min-height:3rem;border-radius:.3rem;margin-bottom:10px;margin-bottom:.625rem;padding:10px;padding:.625rem;color:#333;background-color:#fff;border-color:#ccc;-moz-box-shadow:0 0 8px 3px rgba(255,254,247,.75);box-shadow:0 0 8px 3px rgba(255,254,247,.75);cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.notifier-message .title{font-size:16px;font-size:1rem;line-height:20px;line-height:1.25rem}.notifier-message .content,.notifier-message .title{padding-right:48px;padding-right:3rem}.notifier-message.primary{color:#fff;background-color:#337ab7;border-color:#2e6da4}.notifier-message.success{color:#fff;background-color:#5cb85c;border-color:#4cae4c}.notifier-message.danger{color:#fff;background-color:#d9534f;border-color:#d43f3a}.notifier-message.warning{color:#fff;background-color:#f0ad4e;border-color:#eea236}:host /deep/ .notifier-message svg{position:absolute;-moz-box-sizing:border-box;box-sizing:border-box;top:0;right:0;width:48px;width:3rem;height:48px;height:3rem;padding:10px;padding:.625rem;fill:#fff}.timer{position:absolute;top:0;left:0;width:100%;height:4px;border-radius:.3rem}.timer .bar{display:block;position:relative;height:100%;-moz-border-radius:.3rem;border-radius:.3rem;background:rgba(0,0,0,.3);-webkit-transition:width .1s ease;-moz-transition:width .1s ease;transition:width .1s ease}"],
             animations: [
                 core_1.trigger('enterLeave', [
                     core_1.state('fromRight', core_1.style({ opacity: 1, transform: 'translateX(0)' })),
@@ -154,7 +151,7 @@ var NotifierMessageComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer, notifier_service_1.NotifierService])
     ], NotifierMessageComponent);
     return NotifierMessageComponent;
 }());

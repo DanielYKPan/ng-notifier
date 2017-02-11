@@ -13,13 +13,23 @@ var common_1 = require('@angular/common');
 var forms_1 = require("@angular/forms");
 var store_1 = require("@ngrx/store");
 var messages_reducer_1 = require("./messages.reducer");
-var notifier_component_1 = require("./notifier.component");
 var notifier_message_component_1 = require("./notifier-message.component");
-var notifier_service_1 = require("./notifier.service");
 var max_pipe_1 = require("./max.pipe");
+var notifier_service_1 = require("./notifier.service");
+var notifier_options_service_1 = require("./notifier-options.service");
+var notifier_container_component_1 = require("./notifier-container.component");
 var NotifierModule = (function () {
     function NotifierModule() {
     }
+    NotifierModule.forRoot = function (config) {
+        return {
+            ngModule: NotifierModule,
+            providers: config ? [
+                { provide: notifier_options_service_1.NotifierOptions, useValue: config },
+                notifier_service_1.NotifierService,
+            ] : [notifier_service_1.NotifierService],
+        };
+    };
     NotifierModule = __decorate([
         core_1.NgModule({
             imports: [
@@ -28,14 +38,14 @@ var NotifierModule = (function () {
                 store_1.StoreModule.provideStore({ messages: messages_reducer_1.messagesReducer }),
             ],
             declarations: [
-                notifier_component_1.NotifierComponent,
+                notifier_container_component_1.NotifierContainerComponent,
                 notifier_message_component_1.NotifierMessageComponent,
                 max_pipe_1.MaxPipe
             ],
             exports: [
-                notifier_component_1.NotifierComponent
+                notifier_container_component_1.NotifierContainerComponent
             ],
-            providers: [notifier_service_1.NotifierService]
+            entryComponents: [notifier_container_component_1.NotifierContainerComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], NotifierModule);
