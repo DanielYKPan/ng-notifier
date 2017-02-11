@@ -2,11 +2,10 @@
  * app.component
  */
 
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { NotifierService } from "./notifier/notifier.service";
 
 import '../sass/main.scss';
-import { INotifierOptions } from "./notifier/notifier.model";
 
 @Component({
     selector: 'yk-app',
@@ -17,20 +16,13 @@ import { INotifierOptions } from "./notifier/notifier.model";
 export class AppComponent implements OnInit {
 
     private test = 1;
-    options: INotifierOptions = {
-        animate: 'fade',
-        clickToClose: true,
-        maxStack: 5,
-        pauseOnHover: true,
-        position: ['bottom', 'center'],
-        theClass: 'good bad hello world',
-        timeDelay: 3000,
-    };
 
-    constructor( private notifierService: NotifierService ) {
+    constructor( private notifierService: NotifierService,
+                 private vRef: ViewContainerRef ) {
     }
 
     ngOnInit(): void {
+        this.notifierService.setRootViewContainerRef(this.vRef);
     }
 
     add() {

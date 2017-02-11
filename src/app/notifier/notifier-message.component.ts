@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { INotifierMessage } from "./notifier.model";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { Timer } from "./timer";
 
 // webpack1_
 declare let require: any;
@@ -99,7 +98,6 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
     private timerId: number = 0;
     private start: number;
     private timeLeft: number;
-    private timer: Timer;
 
     constructor( private domSanitizer: DomSanitizer ) {
     }
