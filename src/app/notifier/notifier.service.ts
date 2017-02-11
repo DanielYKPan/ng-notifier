@@ -2,47 +2,85 @@
  * notification.service
  */
 
-import { Injectable } from '@angular/core';
-import { Subject } from "rxjs";
+import {
+    Injectable,
+    ComponentRef,
+    ViewContainerRef,
+    ComponentFactoryResolver,
+    ApplicationRef,
+    Optional,
+    ReflectiveInjector
+} from '@angular/core';
 import { uuid } from "./uuid";
-import { ADD_MESSAGE, REMOVE_MESSAGE, REMOVE_ALL } from "./messages.reducer";
-import { INotifierEvent, INotifierMessage, INotifierOptions } from "./notifier.model";
+import { INotifierMessage } from "./notifier.model";
 import { Icons, defaultIcons } from './icons';
+import { NotifierOptions } from "./notifier-options.service";
+import { NotifierContainerComponent } from "./notifier-container.component";
 
 @Injectable()
 export class NotifierService {
 
-    private emitter: Subject<INotifierEvent> = new Subject<INotifierEvent>();
+    container: ComponentRef<any>;
 
     private icons: Icons = defaultIcons;
+    private options: any = {};
+    private _rootViewContainerRef: ViewContainerRef;
 
-    private options: INotifierOptions = {
-        animate: 'fromRight',
-        clickToClose: true,
-        pauseOnHover: true,
-        position: ['bottom', 'right'],
-        maxStack: 5,
-        theClass: '',
-        timeDelay: 0
-    };
-
-    constructor() {
+    constructor( private componentFactoryResolver: ComponentFactoryResolver,
+                 private appRef: ApplicationRef,
+                 @Optional() options: NotifierOptions ) {
+        if (options) {
+            Object.assign(this.options, options);
+        }
     }
 
-    getEmitter(): Subject<INotifierEvent> {
-        return this.emitter;
-    }
-
-    getOptions(): INotifierOptions {
-        return this.options;
+    setRootViewContainerRef( vRef: ViewContainerRef ) {
+        this._rootViewContainerRef = vRef;
     }
 
     set( message: INotifierMessage ): INotifierMessage {
+
+        if (!this.container) {
+            // get app root view component ref
+            if (!this._rootViewContainerRef) {
+                try {
+                    this._rootViewContainerRef = this.appRef['_rootComponents'][0]['_hostElement'].vcRef;
+                } catch (e) {
+                    console.log(new Error('Please set root ViewContainerRef using setRootViewContainerRef(vRef: ViewContainerRef) method.'));
+                }
+            }
+
+            // get options providers
+            let providers = ReflectiveInjector.resolve([
+                {provide: NotifierOptions, useValue: <NotifierOptions>this.options}
+            ]);
+
+            let notifierFactory = this.componentFactoryResolver.resolveComponentFactory(NotifierContainerComponent);
+            let childInjector = ReflectiveInjector.fromResolvedProviders(providers, this._rootViewContainerRef.parentInjector);
+            this.container = this._rootViewContainerRef.createComponent(notifierFactory, this._rootViewContainerRef.length, childInjector);
+        }
         if (!message.id) {
             message.id = uuid();
         }
-        this.emitter.next({command: ADD_MESSAGE, message: message});
+        this.container.instance.addNotice(message);
         return message;
+    }
+
+    dispose(): void {
+        if (this.container && !this.container.instance.anyNotices()) {
+            this.container.destroy();
+            this.container = null;
+            return;
+        }
+        return;
+    }
+
+    clear( notice?: INotifierMessage ): void {
+        if (!this.container) return;
+        this.container.instance.removeNotice(notice);
+        if(!this.container.instance.anyNotices()){
+            this.dispose();
+        }
     }
 
     info( content: string, title?: string ) {
@@ -83,18 +121,5 @@ export class NotifierService {
             icon: this.icons.alert,
         };
         return this.set(message);
-    }
-
-    remove( message?: INotifierMessage ) {
-        message ? this.emitter.next({command: REMOVE_MESSAGE, message: message}) :
-            this.emitter.next({command: REMOVE_ALL});
-    }
-
-    attachPersonalOptions( options: any ): void {
-        Object.keys(options).forEach(o => {
-            if(this.options.hasOwnProperty(o)) {
-                this.options[o] = options[o];
-            }
-        });
     }
 }

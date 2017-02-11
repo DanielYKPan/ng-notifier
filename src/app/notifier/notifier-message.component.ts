@@ -4,10 +4,11 @@
 
 import {
     Component, OnInit, OnDestroy, Input, AnimationTransitionEvent, trigger, state,
-    transition, style, animate, Output, EventEmitter
+    transition, style, animate
 } from '@angular/core';
 import { INotifierMessage } from "./notifier.model";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { NotifierService } from "./notifier.service";
 
 // webpack1_
 declare let require: any;
@@ -91,14 +92,13 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
     @Input() theClass: string;
     @Input() timeDelay: number;
 
-    @Output() onRemoveMessage = new EventEmitter<INotifierMessage>();
-
     private safeSvg: SafeHtml;
     private timerId: number = 0;
     private start: any;
     private timeLeft: any;
 
-    constructor( private domSanitizer: DomSanitizer ) {
+    constructor( private domSanitizer: DomSanitizer,
+                 private notifierService: NotifierService ) {
     }
 
     ngOnInit() {
@@ -116,7 +116,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
 
     animationDone( event: AnimationTransitionEvent, message: INotifierMessage ): void {
         if (event.toState == message.state + 'Out') {
-            this.onRemoveMessage.next(message);
+            this.notifierService.clear(message);
         }
     }
 
