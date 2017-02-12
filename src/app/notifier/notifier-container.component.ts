@@ -4,7 +4,7 @@
 
 import { Component, OnInit, OnDestroy, Optional } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { INotice } from "./notifier-notice";
+import { Notice } from "./notifier-notice";
 import { ADD_NOTICE, REMOVE_NOTICE, REMOVE_ALL } from "./messages.reducer";
 import { Subscription } from "rxjs";
 import { NotifierOptions } from "./notifier-options.service";
@@ -23,7 +23,7 @@ const myDpTpl: string = require("./notifier-container.component.html");
 
 export class NotifierContainerComponent implements OnInit, OnDestroy {
 
-    notices: INotice[];
+    notices: Notice[];
     animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade' = 'fromRight';
     clickToClose: boolean = true;
     maxStack: number = 5;
@@ -35,7 +35,7 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
     private selectNoticesSub: Subscription;
 
 
-    constructor( private store: Store<INotice[]>,
+    constructor( private store: Store<Notice[]>,
                  @Optional() options: NotifierOptions ) {
         if (options) {
             Object.assign(this, options);
@@ -44,7 +44,7 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.selectNoticesSub = this.store.select('messages').subscribe(
-            ( data: INotice[] ) => this.notices = data
+            ( data: Notice[] ) => this.notices = data
         );
     }
 
@@ -52,11 +52,11 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
         this.selectNoticesSub.unsubscribe();
     }
 
-    addNotice( notice: INotice ): void {
+    addNotice( notice: Notice ): void {
         this.store.dispatch({type: ADD_NOTICE, payload: notice});
     }
 
-    removeNotice( notice?: INotice ): void {
+    removeNotice( notice?: Notice ): void {
         if (notice) {
             this.store.dispatch({type: REMOVE_NOTICE, payload: notice});
         } else {

@@ -3,13 +3,13 @@
  */
 
 import { ActionReducer, Action } from "@ngrx/store";
-import { INotice } from "./notifier-notice";
+import { Notice } from "./notifier-notice";
 
 export const ADD_NOTICE = 'ADD_NOTICE';
 export const REMOVE_NOTICE = 'REMOVE_NOTICE';
 export const REMOVE_ALL = 'REMOVE_ALL';
 
-export const messagesReducer: ActionReducer<Array<INotice>> = ( state: Array<INotice> = [], action: Action ) => {
+export const messagesReducer: ActionReducer<Array<Notice>> = ( state: Array<Notice> = [], action: Action ) => {
     switch (action.type) {
         case ADD_NOTICE:
             return [...state, Object.assign({}, action.payload)];

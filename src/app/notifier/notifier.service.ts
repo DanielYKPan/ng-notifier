@@ -11,8 +11,7 @@ import {
     Optional,
     ReflectiveInjector
 } from '@angular/core';
-import { uuid } from "./uuid";
-import { INotice } from "./notifier-notice";
+import { Notice } from "./notifier-notice";
 import { Icons, defaultIcons } from './icons';
 import { NotifierOptions } from "./notifier-options.service";
 import { NotifierContainerComponent } from "./notifier-container.component";
@@ -38,7 +37,7 @@ export class NotifierService {
         this._rootViewContainerRef = vRef;
     }
 
-    set( message: INotice ): INotice {
+    set( notice: Notice, options?: Object ): Notice {
 
         if (!this.container) {
             // get app root view component ref
@@ -59,11 +58,19 @@ export class NotifierService {
             let childInjector = ReflectiveInjector.fromResolvedProviders(providers, this._rootViewContainerRef.parentInjector);
             this.container = this._rootViewContainerRef.createComponent(notifierFactory, this._rootViewContainerRef.length, childInjector);
         }
-        if (!message.id) {
-            message.id = uuid();
-        }
-        this.container.instance.addNotice(message);
-        return message;
+
+        Object.keys(notice.config).forEach(k => {
+            if (this.options.hasOwnProperty(k)) {
+                notice.config[k] = this.options[k];
+            }
+
+            if (options && options.hasOwnProperty(k)) {
+                notice.config[k] = options[k];
+            }
+        });
+
+        this.container.instance.addNotice(notice);
+        return notice;
     }
 
     dispose(): void {
@@ -75,7 +82,7 @@ export class NotifierService {
         return;
     }
 
-    clear( notice?: INotice ): void {
+    clear( notice?: Notice ): void {
         if (!this.container) return;
         this.container.instance.removeNotice(notice);
         if(!this.container.instance.anyNotices()){
@@ -83,43 +90,23 @@ export class NotifierService {
         }
     }
 
-    info( content: string, title?: string ) {
-        let message = {
-            title: title,
-            content: content,
-            type: 'primary',
-            icon: this.icons.info,
-        };
-        return this.set(message);
+    info( content: string, title?: string, options?: Object ) {
+        let notice = new Notice('primary', content, title, this.icons.info);
+        return this.set(notice, options);
     }
 
-    success( content: string, title?: string ) {
-        let message = {
-            title: title,
-            content: content,
-            type: 'success',
-            icon: this.icons.success,
-        };
-        return this.set(message);
+    success( content: string, title?: string, options?: Object ) {
+        let notice = new Notice('success', content, title, this.icons.success);
+        return this.set(notice, options);
     }
 
-    error( content: string, title?: string ) {
-        let message = {
-            title: title,
-            content: content,
-            type: 'danger',
-            icon: this.icons.error,
-        };
-        return this.set(message);
+    error( content: string, title?: string, options?: Object ) {
+        let notice = new Notice('danger', content, title, this.icons.error);
+        return this.set(notice, options);
     }
 
-    alert( content: string, title?: string ) {
-        let message = {
-            title: title,
-            content: content,
-            type: 'warning',
-            icon: this.icons.alert,
-        };
-        return this.set(message);
+    alert( content: string, title?: string, options?: Object ) {
+        let notice = new Notice('warning', content, title, this.icons.alert);
+        return this.set(notice, options);
     }
 }

@@ -29,4 +29,8 @@ export class AppComponent implements OnInit {
         this.notifierService.success('Hello World ' + this.test, 'Angular Message:');
         this.test += 1;
     }
+
+    addOverride() {
+        this.notifierService.info('Hello World Override', 'Angular Message:', {animate: 'fade'});
+    }
 }
