@@ -2,10 +2,5 @@
      *ngIf="notices"
      [ngClass]="position">
     <ng2-notifier-message *ngFor="let message of notices| max: maxStack"
-                          [animate]="animate"
-                          [theClass]="theClass"
-                          [timeDelay]="timeDelay"
-                          [clickToClose]="clickToClose"
-                          [pauseOnHover]="pauseOnHover"
-                          [message]="message"></ng2-notifier-message>
+                          [notice]="message"></ng2-notifier-message>
 </div>

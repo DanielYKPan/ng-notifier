@@ -1,5 +1,5 @@
 import { ComponentRef, ViewContainerRef, ComponentFactoryResolver, ApplicationRef } from '@angular/core';
-import { INotifierMessage } from "./notifier.model";
+import { Notice } from "./notifier-notice";
 import { NotifierOptions } from "./notifier-options.service";
 export declare class NotifierService {
     private componentFactoryResolver;
@@ -10,11 +10,11 @@ export declare class NotifierService {
     private _rootViewContainerRef;
     constructor(componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, options: NotifierOptions);
     setRootViewContainerRef(vRef: ViewContainerRef): void;
-    set(message: INotifierMessage): INotifierMessage;
+    set(notice: Notice, options?: Object): Notice;
     dispose(): void;
-    clear(notice?: INotifierMessage): void;
-    info(content: string, title?: string): INotifierMessage;
-    success(content: string, title?: string): INotifierMessage;
-    error(content: string, title?: string): INotifierMessage;
-    alert(content: string, title?: string): INotifierMessage;
+    clear(notice?: Notice): void;
+    info(content: string, title?: string, options?: Object): Notice;
+    success(content: string, title?: string, options?: Object): Notice;
+    error(content: string, title?: string, options?: Object): Notice;
+    alert(content: string, title?: string, options?: Object): Notice;
 }

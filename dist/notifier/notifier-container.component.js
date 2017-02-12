@@ -36,11 +36,11 @@ var NotifierContainerComponent = (function () {
         this.selectNoticesSub.unsubscribe();
     };
     NotifierContainerComponent.prototype.addNotice = function (notice) {
-        this.store.dispatch({ type: messages_reducer_1.ADD_MESSAGE, payload: notice });
+        this.store.dispatch({ type: messages_reducer_1.ADD_NOTICE, payload: notice });
     };
     NotifierContainerComponent.prototype.removeNotice = function (notice) {
         if (notice) {
-            this.store.dispatch({ type: messages_reducer_1.REMOVE_MESSAGE, payload: notice });
+            this.store.dispatch({ type: messages_reducer_1.REMOVE_NOTICE, payload: notice });
         }
         else {
             this.store.dispatch({ type: messages_reducer_1.REMOVE_ALL });
@@ -52,7 +52,7 @@ var NotifierContainerComponent = (function () {
     NotifierContainerComponent = __decorate([
         core_1.Component({
             selector: 'app-notifier-container',
-            template: "<div class=\"notifier-wrapper\" *ngIf=\"notices\" [ngClass]=\"position\"><ng2-notifier-message *ngFor=\"let message of notices| max: maxStack\" [animate]=\"animate\" [theClass]=\"theClass\" [timeDelay]=\"timeDelay\" [clickToClose]=\"clickToClose\" [pauseOnHover]=\"pauseOnHover\" [message]=\"message\"></ng2-notifier-message></div>",
+            template: "<div class=\"notifier-wrapper\" *ngIf=\"notices\" [ngClass]=\"position\"><ng2-notifier-message *ngFor=\"let message of notices| max: maxStack\" [notice]=\"message\"></ng2-notifier-message></div>",
             styles: [".notifier-wrapper{position:fixed}.notifier-wrapper.left{left:16px;left:1rem}.notifier-wrapper.bottom{bottom:16px;bottom:1rem}.notifier-wrapper.right{right:16px;right:1rem}.notifier-wrapper.top{top:16px;top:1rem}.notifier-wrapper.center{left:50%;-webkit-transform:translateX(-50%);-moz-transform:translateX(-50%);-ms-transform:translateX(-50%);transform:translateX(-50%)}"],
         }),
         __param(1, core_1.Optional()), 

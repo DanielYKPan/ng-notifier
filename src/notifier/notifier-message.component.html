@@ -1,14 +1,11 @@
-<div [@enterLeave]="animate"
-     (@enterLeave.done)="animationDone($event, message)"
+<div [@enterLeave]="notice.state"
+     (@enterLeave.done)="animationDone($event)"
      (click)="onClick()"
      (mouseenter)="onEnter()"
      (mouseleave)="onLeave()"
-     [class]="theClass"
-     class="notifier-message {{message.type}}">
-    <div class="timer" *ngIf="showProcess">
-        <div class="bar" [style.width]="getPercentage()"></div>
-    </div>
-    <div class="title">{{message.title}}</div>
-    <div class="content">{{message.content}}</div>
+     [class]="notice.config.theClass"
+     class="notifier-message {{notice.type}}">
+    <div class="title">{{notice.title}}</div>
+    <div class="content">{{notice.content}}</div>
     <div [innerHTML]="safeSvg"></div>
 </div>

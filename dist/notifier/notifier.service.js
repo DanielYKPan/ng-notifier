@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
-var uuid_1 = require("./uuid");
+var notifier_notice_1 = require("./notifier-notice");
 var icons_1 = require('./icons');
 var notifier_options_service_1 = require("./notifier-options.service");
 var notifier_container_component_1 = require("./notifier-container.component");
@@ -29,7 +29,8 @@ var NotifierService = (function () {
     NotifierService.prototype.setRootViewContainerRef = function (vRef) {
         this._rootViewContainerRef = vRef;
     };
-    NotifierService.prototype.set = function (message) {
+    NotifierService.prototype.set = function (notice, options) {
+        var _this = this;
         if (!this.container) {
             if (!this._rootViewContainerRef) {
                 try {
@@ -46,11 +47,16 @@ var NotifierService = (function () {
             var childInjector = core_1.ReflectiveInjector.fromResolvedProviders(providers, this._rootViewContainerRef.parentInjector);
             this.container = this._rootViewContainerRef.createComponent(notifierFactory, this._rootViewContainerRef.length, childInjector);
         }
-        if (!message.id) {
-            message.id = uuid_1.uuid();
-        }
-        this.container.instance.addNotice(message);
-        return message;
+        Object.keys(notice.config).forEach(function (k) {
+            if (_this.options.hasOwnProperty(k)) {
+                notice.config[k] = _this.options[k];
+            }
+            if (options && options.hasOwnProperty(k)) {
+                notice.config[k] = options[k];
+            }
+        });
+        this.container.instance.addNotice(notice);
+        return notice;
     };
     NotifierService.prototype.dispose = function () {
         if (this.container && !this.container.instance.anyNotices()) {
@@ -68,41 +74,21 @@ var NotifierService = (function () {
             this.dispose();
         }
     };
-    NotifierService.prototype.info = function (content, title) {
-        var message = {
-            title: title,
-            content: content,
-            type: 'primary',
-            icon: this.icons.info,
-        };
-        return this.set(message);
+    NotifierService.prototype.info = function (content, title, options) {
+        var notice = new notifier_notice_1.Notice('primary', content, title, this.icons.info);
+        return this.set(notice, options);
     };
-    NotifierService.prototype.success = function (content, title) {
-        var message = {
-            title: title,
-            content: content,
-            type: 'success',
-            icon: this.icons.success,
-        };
-        return this.set(message);
+    NotifierService.prototype.success = function (content, title, options) {
+        var notice = new notifier_notice_1.Notice('success', content, title, this.icons.success);
+        return this.set(notice, options);
     };
-    NotifierService.prototype.error = function (content, title) {
-        var message = {
-            title: title,
-            content: content,
-            type: 'danger',
-            icon: this.icons.error,
-        };
-        return this.set(message);
+    NotifierService.prototype.error = function (content, title, options) {
+        var notice = new notifier_notice_1.Notice('danger', content, title, this.icons.error);
+        return this.set(notice, options);
     };
-    NotifierService.prototype.alert = function (content, title) {
-        var message = {
-            title: title,
-            content: content,
-            type: 'warning',
-            icon: this.icons.alert,
-        };
-        return this.set(message);
+    NotifierService.prototype.alert = function (content, title, options) {
+        var notice = new notifier_notice_1.Notice('warning', content, title, this.icons.alert);
+        return this.set(notice, options);
     };
     NotifierService = __decorate([
         core_1.Injectable(),

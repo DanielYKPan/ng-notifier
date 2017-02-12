@@ -1,10 +1,10 @@
 import { OnInit, OnDestroy } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { INotifierMessage } from "./notifier.model";
+import { Notice } from "./notifier-notice";
 import { NotifierOptions } from "./notifier-options.service";
 export declare class NotifierContainerComponent implements OnInit, OnDestroy {
     private store;
-    notices: INotifierMessage[];
+    notices: Notice[];
     animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade';
     clickToClose: boolean;
     maxStack: number;
@@ -13,10 +13,10 @@ export declare class NotifierContainerComponent implements OnInit, OnDestroy {
     timeDelay: number;
     theClass: string;
     private selectNoticesSub;
-    constructor(store: Store<INotifierMessage[]>, options: NotifierOptions);
+    constructor(store: Store<Notice[]>, options: NotifierOptions);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    addNotice(notice: INotifierMessage): void;
-    removeNotice(notice?: INotifierMessage): void;
+    addNotice(notice: Notice): void;
+    removeNotice(notice?: Notice): void;
     anyNotices(): boolean;
 }

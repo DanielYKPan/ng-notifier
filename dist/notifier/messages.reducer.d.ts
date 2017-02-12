@@ -1,6 +1,6 @@
 import { ActionReducer } from "@ngrx/store";
-import { INotifierMessage } from "./notifier.model";
-export declare const ADD_MESSAGE: string;
-export declare const REMOVE_MESSAGE: string;
+import { Notice } from "./notifier-notice";
+export declare const ADD_NOTICE: string;
+export declare const REMOVE_NOTICE: string;
 export declare const REMOVE_ALL: string;
-export declare const messagesReducer: ActionReducer<Array<INotifierMessage>>;
+export declare const messagesReducer: ActionReducer<Array<Notice>>;
