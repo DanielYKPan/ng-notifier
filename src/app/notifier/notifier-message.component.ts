@@ -24,24 +24,24 @@ const myDpTpl: string = require("./notifier-message.component.html");
         trigger('enterLeave', [
 
             // Enter from right
-            state('fromRight', style({opacity: 1, transform: 'translateX(0)'})),
-            state('fromRightOut', style({opacity: 0, transform: 'translateX(-10%)'})),
-            transition('void => fromRight', [
+            state('flyRight', style({opacity: 1, transform: 'translateX(0)'})),
+            state('flyRightOut', style({opacity: 0, transform: 'translateX(-10%)'})),
+            transition('void => flyRight', [
                 style({opacity: 0, transform: 'translateX(10%)'}),
                 animate('400ms ease-in-out')
             ]),
-            transition('fromRight => fromRightOut', [
+            transition('flyRight => flyRightOut', [
                 animate('300ms ease-in-out', style({opacity: 0, transform: 'translateX(-10%)'}))
             ]),
 
             // Enter from left
-            state('fromLeft', style({opacity: 1, transform: 'translateX(0)'})),
-            state('fromLeftOut', style({opacity: 0, transform: 'translateX(10%)'})),
-            transition('* => fromLeft', [
+            state('flyLeft', style({opacity: 1, transform: 'translateX(0)'})),
+            state('flyLeftOut', style({opacity: 0, transform: 'translateX(10%)'})),
+            transition('* => flyLeft', [
                 style({opacity: 0, transform: 'translateX(-10%)'}),
                 animate('400ms ease-in-out')
             ]),
-            transition('fromLeft => fromLeftOut', [
+            transition('flyLeft => flyLeftOut', [
                 animate('300ms ease-in-out', style({opacity: 0, transform: 'translateX(10%)'}))
             ]),
 
@@ -100,7 +100,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.notice.icon);
         this.notice.state = this.notice.config.animate;
 
-        if (this.notice.config.timeDelay > 0) {
+        if (this.notice.config.notifierLife > 0) {
             this.startTimer();
         }
     }
@@ -117,7 +117,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
 
     onEnter(): void {
         if (this.notice.config.pauseOnHover) {
-            this.timeLeft = this.notice.config.timeDelay;
+            this.timeLeft = this.notice.config.notifierLife;
             this.timeLeft -= new Date().getTime() - this.start;
             this.clearTimer();
         }
@@ -126,7 +126,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
     onLeave(): void {
         if (this.notice.config.pauseOnHover) {
             if (!this.timeLeft) {
-                this.timeLeft = this.notice.config.timeDelay;
+                this.timeLeft = this.notice.config.notifierLife;
             }
             this.timerId = window.setTimeout(() => {
                 this.setStateOut();
@@ -144,7 +144,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         this.start = new Date().getTime();
         this.timerId = window.setTimeout(() => {
             this.setStateOut();
-        }, this.notice.config.timeDelay);
+        }, this.notice.config.notifierLife);
     }
 
     private clearTimer(): void {

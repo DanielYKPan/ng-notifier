@@ -13,8 +13,7 @@ import { NotifierModule } from "./notifier/notifier.module";
         BrowserModule,
         FormsModule,
         NotifierModule.forRoot({
-            position: ['bottom', 'center'],
-            timeDelay: 3000
+            position: ['bottom', 'center']
         }),
     ],
     declarations: [
