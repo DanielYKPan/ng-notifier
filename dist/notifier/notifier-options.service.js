@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var NotifierOptions = (function () {
     function NotifierOptions(options) {
-        this.animate = 'fromRight';
+        this.animate = 'flyRight';
         this.clickToClose = true;
         this.maxStack = 5;
         this.pauseOnHover = true;
         this.position = ['bottom', 'right'];
-        this.timeDelay = 0;
+        this.notifierLife = 0;
         Object.assign(this, options);
     }
     NotifierOptions = __decorate([

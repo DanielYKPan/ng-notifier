@@ -21,7 +21,7 @@ var NotifierMessageComponent = (function () {
     NotifierMessageComponent.prototype.ngOnInit = function () {
         this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.notice.icon);
         this.notice.state = this.notice.config.animate;
-        if (this.notice.config.timeDelay > 0) {
+        if (this.notice.config.notifierLife > 0) {
             this.startTimer();
         }
     };
@@ -35,7 +35,7 @@ var NotifierMessageComponent = (function () {
     };
     NotifierMessageComponent.prototype.onEnter = function () {
         if (this.notice.config.pauseOnHover) {
-            this.timeLeft = this.notice.config.timeDelay;
+            this.timeLeft = this.notice.config.notifierLife;
             this.timeLeft -= new Date().getTime() - this.start;
             this.clearTimer();
         }
@@ -44,7 +44,7 @@ var NotifierMessageComponent = (function () {
         var _this = this;
         if (this.notice.config.pauseOnHover) {
             if (!this.timeLeft) {
-                this.timeLeft = this.notice.config.timeDelay;
+                this.timeLeft = this.notice.config.notifierLife;
             }
             this.timerId = window.setTimeout(function () {
                 _this.setStateOut();
@@ -61,7 +61,7 @@ var NotifierMessageComponent = (function () {
         this.start = new Date().getTime();
         this.timerId = window.setTimeout(function () {
             _this.setStateOut();
-        }, this.notice.config.timeDelay);
+        }, this.notice.config.notifierLife);
     };
     NotifierMessageComponent.prototype.clearTimer = function () {
         clearTimeout(this.timerId);
@@ -81,22 +81,22 @@ var NotifierMessageComponent = (function () {
             styles: [".notifier-message,.timer{-moz-border-radius:.3rem}.notifier-message{font-size:12px;font-size:.75rem;line-height:20px;line-height:1.25rem;position:relative;width:272px;width:17rem;min-height:48px;min-height:3rem;border-radius:.3rem;margin-bottom:10px;margin-bottom:.625rem;padding:10px;padding:.625rem;color:#333;background-color:#fff;border-color:#ccc;-moz-box-shadow:0 0 8px 3px rgba(255,254,247,.75);box-shadow:0 0 8px 3px rgba(255,254,247,.75);cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.notifier-message .title{font-size:16px;font-size:1rem;line-height:20px;line-height:1.25rem}.notifier-message .content,.notifier-message .title{padding-right:48px;padding-right:3rem}.notifier-message.primary{color:#fff;background-color:#337ab7;border-color:#2e6da4}.notifier-message.success{color:#fff;background-color:#5cb85c;border-color:#4cae4c}.notifier-message.danger{color:#fff;background-color:#d9534f;border-color:#d43f3a}.notifier-message.warning{color:#fff;background-color:#f0ad4e;border-color:#eea236}:host /deep/ .notifier-message svg{position:absolute;-moz-box-sizing:border-box;box-sizing:border-box;top:0;right:0;width:48px;width:3rem;height:48px;height:3rem;padding:10px;padding:.625rem;fill:#fff}.timer{position:absolute;top:0;left:0;width:100%;height:4px;border-radius:.3rem}.timer .bar{display:block;position:relative;height:100%;-moz-border-radius:.3rem;border-radius:.3rem;background:rgba(0,0,0,.3);-webkit-transition:width .1s ease;-moz-transition:width .1s ease;transition:width .1s ease}"],
             animations: [
                 core_1.trigger('enterLeave', [
-                    core_1.state('fromRight', core_1.style({ opacity: 1, transform: 'translateX(0)' })),
-                    core_1.state('fromRightOut', core_1.style({ opacity: 0, transform: 'translateX(-10%)' })),
-                    core_1.transition('void => fromRight', [
+                    core_1.state('flyRight', core_1.style({ opacity: 1, transform: 'translateX(0)' })),
+                    core_1.state('flyRightOut', core_1.style({ opacity: 0, transform: 'translateX(-10%)' })),
+                    core_1.transition('void => flyRight', [
                         core_1.style({ opacity: 0, transform: 'translateX(10%)' }),
                         core_1.animate('400ms ease-in-out')
                     ]),
-                    core_1.transition('fromRight => fromRightOut', [
+                    core_1.transition('flyRight => flyRightOut', [
                         core_1.animate('300ms ease-in-out', core_1.style({ opacity: 0, transform: 'translateX(-10%)' }))
                     ]),
-                    core_1.state('fromLeft', core_1.style({ opacity: 1, transform: 'translateX(0)' })),
-                    core_1.state('fromLeftOut', core_1.style({ opacity: 0, transform: 'translateX(10%)' })),
-                    core_1.transition('* => fromLeft', [
+                    core_1.state('flyLeft', core_1.style({ opacity: 1, transform: 'translateX(0)' })),
+                    core_1.state('flyLeftOut', core_1.style({ opacity: 0, transform: 'translateX(10%)' })),
+                    core_1.transition('* => flyLeft', [
                         core_1.style({ opacity: 0, transform: 'translateX(-10%)' }),
                         core_1.animate('400ms ease-in-out')
                     ]),
-                    core_1.transition('fromLeft => fromLeftOut', [
+                    core_1.transition('flyLeft => flyLeftOut', [
                         core_1.animate('300ms ease-in-out', core_1.style({ opacity: 0, transform: 'translateX(10%)' }))
                     ]),
                     core_1.state('scale', core_1.style({ opacity: 1, transform: 'scale(1)' })),

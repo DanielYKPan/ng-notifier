@@ -12,10 +12,10 @@ export class Notice {
     icon: string;
     state: string;
     config: any = {
-        animate: 'fromRight',
+        animate: 'fade',
         clickToClose: true,
         pauseOnHover: true,
-        timeDelay: 0,
+        notifierLife: 3000,
         titleClass: '',
         messageClass: '',
     };

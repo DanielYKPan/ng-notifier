@@ -3,10 +3,10 @@ var uuid_1 = require("./uuid");
 var Notice = (function () {
     function Notice(type, content, title, icon) {
         this.config = {
-            animate: 'fromRight',
+            animate: 'fade',
             clickToClose: true,
             pauseOnHover: true,
-            timeDelay: 0,
+            notifierLife: 3000,
             titleClass: '',
             messageClass: '',
         };
