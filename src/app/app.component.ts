@@ -28,6 +28,6 @@ export class AppComponent implements OnInit {
     }
 
     addOverride() {
-        this.service.info('hello world override', 'Angular Message', {animate: 'fade', timeDelay: 0});
+        this.service.info('hello world override', 'Angular Message', {animate: 'fade', timeDelay: 0, titleClass: 'titleOverride', messageClass: 'messageOverride'});
     }
 }
