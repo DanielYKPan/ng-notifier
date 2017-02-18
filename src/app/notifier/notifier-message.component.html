@@ -3,9 +3,8 @@
      (click)="onClick()"
      (mouseenter)="onEnter()"
      (mouseleave)="onLeave()"
-     [class]="notice.config.theClass"
      class="notifier-message {{notice.type}}">
-    <div class="title">{{notice.title}}</div>
-    <div class="content">{{notice.content}}</div>
+    <div class="{{notice.config.titleClass || 'title'}}">{{notice.title}}</div>
+    <div class="{{notice.config.messageClass || 'content'}}">{{notice.content}}</div>
     <div [innerHTML]="safeSvg"></div>
 </div>

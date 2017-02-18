@@ -13,7 +13,8 @@ export class NotifierOptions {
     pauseOnHover?: boolean = true;
     position?: ['top' | 'bottom', 'right' | 'left' | 'center'] = ['bottom', 'right'];
     timeDelay?: number = 0;
-    theClass?: string;
+    titleClass?: string;
+    messageClass?: string;
 
     constructor( options: Object ) {
         Object.assign(this, options);
