@@ -24,13 +24,8 @@ const myDpTpl: string = require("./notifier-container.component.html");
 export class NotifierContainerComponent implements OnInit, OnDestroy {
 
     notices: Notice[];
-    animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade' = 'fromRight';
-    clickToClose: boolean = true;
     maxStack: number = 5;
-    pauseOnHover: boolean = true;
     position: ['top' | 'bottom', 'right' | 'left' | 'center'] = ['bottom', 'right'];
-    timeDelay: number = 0;
-    theClass: string;
 
     private selectNoticesSub: Subscription;
 

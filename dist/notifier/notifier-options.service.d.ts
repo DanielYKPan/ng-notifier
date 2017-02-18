@@ -5,6 +5,7 @@ export declare class NotifierOptions {
     pauseOnHover?: boolean;
     position?: ['top' | 'bottom', 'right' | 'left' | 'center'];
     timeDelay?: number;
-    theClass?: string;
+    titleClass?: string;
+    messageClass?: string;
     constructor(options: Object);
 }

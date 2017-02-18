@@ -7,7 +7,8 @@ var Notice = (function () {
             clickToClose: true,
             pauseOnHover: true,
             timeDelay: 0,
-            theClass: ''
+            titleClass: '',
+            messageClass: '',
         };
         this.id = uuid_1.uuid();
         this.type = type;

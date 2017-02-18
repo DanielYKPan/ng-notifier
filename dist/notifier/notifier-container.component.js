@@ -18,12 +18,8 @@ var notifier_options_service_1 = require("./notifier-options.service");
 var NotifierContainerComponent = (function () {
     function NotifierContainerComponent(store, options) {
         this.store = store;
-        this.animate = 'fromRight';
-        this.clickToClose = true;
         this.maxStack = 5;
-        this.pauseOnHover = true;
         this.position = ['bottom', 'right'];
-        this.timeDelay = 0;
         if (options) {
             Object.assign(this, options);
         }

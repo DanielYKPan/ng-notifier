@@ -16,10 +16,11 @@ export class Notice {
         clickToClose: true,
         pauseOnHover: true,
         timeDelay: 0,
-        theClass: ''
+        titleClass: '',
+        messageClass: '',
     };
 
-    constructor(type: string, content: string, title?: string, icon?: string) {
+    constructor( type: string, content: string, title?: string, icon?: string ) {
         this.id = uuid();
         this.type = type;
         this.content = content;

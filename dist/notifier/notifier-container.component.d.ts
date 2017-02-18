@@ -5,13 +5,8 @@ import { NotifierOptions } from "./notifier-options.service";
 export declare class NotifierContainerComponent implements OnInit, OnDestroy {
     private store;
     notices: Notice[];
-    animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' | 'fade';
-    clickToClose: boolean;
     maxStack: number;
-    pauseOnHover: boolean;
     position: ['top' | 'bottom', 'right' | 'left' | 'center'];
-    timeDelay: number;
-    theClass: string;
     private selectNoticesSub;
     constructor(store: Store<Notice[]>, options: NotifierOptions);
     ngOnInit(): void;
