@@ -13,7 +13,7 @@ import { NotifierModule } from 'ng2-yk-notifier';
         BrowserModule,
         FormsModule,
         NotifierModule.forRoot({
-            timeDelay: 2000,
+            notifierLife: 2000,
             position : ['bottom', 'center']
         })
     ],
