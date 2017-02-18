@@ -15,8 +15,8 @@ import { NotifierService } from 'ng2-yk-notifier';
 
 export class AppComponent implements OnInit {
 
-    constructor(private vRef: ViewContainerRef,
-                private service: NotifierService ) {
+    constructor( private vRef: ViewContainerRef,
+                 private service: NotifierService ) {
     }
 
     ngOnInit(): void {
@@ -25,5 +25,9 @@ export class AppComponent implements OnInit {
 
     add() {
         this.service.success('hello world', 'Angular Message');
+    }
+
+    addOverride() {
+        this.service.info('hello world override', 'Angular Message', {animate: 'fade', timeDelay: 0});
     }
 }
