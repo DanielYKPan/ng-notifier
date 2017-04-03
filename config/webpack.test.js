@@ -12,29 +12,29 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+                use: ['awesome-typescript-loader', 'angular2-template-loader']
             },
             {
                 test: /\.html$/,
-                loader: 'html'
+                use: 'html'
 
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-                loader: 'null'
+                use: 'null'
             },
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
-                loader: 'null'
+                use: 'null'
             },
             {
                 test: /\.css$/,
                 include: helpers.root('src', 'app'),
-                loader: 'raw'
+                use: 'raw'
             },
             /*
              * SCSS compile
@@ -43,12 +43,12 @@ module.exports = {
             {
                 test: /\.scss$/,
                 include: helpers.root('src', 'app'),
-                loader: 'raw!postcss!sass'
+                use: 'raw!postcss!sass'
             },
             {
                 test: /\.scss$/,
                 include: helpers.root('src', 'sass'),
-                loader: 'null'
+                use: 'null'
             }
         ]
     }

@@ -3,9 +3,8 @@
  */
 
 import { Component, OnInit, ViewContainerRef } from "@angular/core";
-
+import { NotifierService } from '../../npmdist';
 import '../sass/main.scss';
-import { NotifierService } from 'ng2-yk-notifier';
 
 @Component({
     selector: 'yk-app',

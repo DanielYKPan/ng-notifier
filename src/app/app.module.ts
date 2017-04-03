@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
-import { NotifierModule } from 'ng2-yk-notifier';
+import { NotifierModule } from '../../npmdist';
 
 @NgModule({
     imports: [
