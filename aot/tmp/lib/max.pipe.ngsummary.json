@@ -1,0 +1,1 @@
+{"summaries":[{"symbol":{"__symbol":0,"members":[]},"metadata":{"__symbolic":"class"},"type":{"summaryKind":0,"type":{"reference":{"__symbol":0,"members":[]},"diDeps":[],"lifecycleHooks":[]},"name":"max","pure":true}}],"symbols":[{"__symbol":0,"name":"MaxPipe","filePath":"/Users/danielpan/Documents/development/projects/personal/angular2/ng2-notification/tmp/lib/max.pipe.d.ts"}]}

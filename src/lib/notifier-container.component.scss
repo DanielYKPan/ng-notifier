@@ -1,0 +1,30 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.notifier-wrapper {
+  position: fixed;
+
+  &.left {
+    left: 1rem;
+  }
+
+  &.bottom {
+    bottom: 1rem;
+  }
+
+  &.right {
+    right: 1rem;
+  }
+
+  &.top {
+    top: 1rem;
+  }
+
+  &.center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

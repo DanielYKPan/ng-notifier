@@ -1,11 +1,14 @@
-Angular: Notifier (ng2-yk-notifier)
+Angular: Notifier (ng-notifier)
 ===================
+
+## Important
+This package is suitable to Angular v2.X and v4.X apps.
 
 ## Usage
 
-1. Install ng2-yk-notifier using npm:
+1. Install ng-notifier using npm:
 
-    ``` npm install ng2-yk-notifier --save ```
+    ``` npm install ng-notifier --save ```
 
 2. Add NotifierModule into your AppModule class. `app.module.ts` would look like this:
 
@@ -14,7 +17,7 @@ Angular: Notifier (ng2-yk-notifier)
         import {NgModule} from '@angular/core';
         import {BrowserModule} from '@angular/platform-browser';
         import {AppComponent} from './app.component';
-        import {NotifierModule} from 'ng2-yk-notifier';
+        import {NotifierModule} from 'ng-notifier';
         
         @NgModule({
           imports: [BrowserModule, NotifierModule.forRoot()],
@@ -30,7 +33,7 @@ Angular: Notifier (ng2-yk-notifier)
 
     ```typescript
         import { Component, OnInit, ViewContainerRef } from "@angular/core";
-        import { NotifierService } from 'ng2-yk-notifier';
+        import { NotifierService } from 'ng-notifier';
         
         @Component({
           selector: 'awesome-component',
@@ -105,7 +108,7 @@ Use dependency inject for custom configurations. You can either inject into `app
        import {NgModule} from '@angular/core';
        import {BrowserModule} from '@angular/platform-browser';
        import {AppComponent} from './app.component';
-       import {NotifierModule, NotifierOptions } from 'ng2-yk-notifier';
+       import {NotifierModule, NotifierOptions } from 'ng-notifier';
        
        let options: NotifierOptions = new NotifierOptions({
          animate: 'flyRight',
