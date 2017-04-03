@@ -4,14 +4,14 @@
 
 import { NgModule, ModuleWithProviders }      from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
-import { StoreModule } from "@ngrx/store";
-import { messagesReducer } from "./messages.reducer";
-import { NotifierMessageComponent } from "./notifier-message.component";
-import { MaxPipe } from "./max.pipe";
-import { NotifierService } from "./notifier.service";
-import { NotifierOptions } from "./notifier-options.service";
-import { NotifierContainerComponent } from "./notifier-container.component";
+import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { messagesReducer } from './messages.reducer';
+import { NotifierMessageComponent } from './notifier-message.component';
+import { MaxPipe } from './max.pipe';
+import { NotifierService } from './notifier.service';
+import { NotifierOptions } from './notifier-options.service';
+import { NotifierContainerComponent } from './notifier-container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({

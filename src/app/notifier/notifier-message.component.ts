@@ -3,23 +3,17 @@
  */
 
 import {
-    Component, OnInit, OnDestroy, Input, AnimationTransitionEvent
+    Component, OnInit, OnDestroy, Input
 } from '@angular/core';
-import { Notice } from "./notifier-notice";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { NotifierService } from "./notifier.service";
+import { Notice } from './notifier-notice';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NotifierService } from './notifier.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
-// webpack1_
-declare let require: any;
-const myDpStyles: string = require("./notifier-message.component.scss");
-const myDpTpl: string = require("./notifier-message.component.html");
-// webpack2_
 
 @Component({
     selector: 'ng2-notifier-message',
-    template: myDpTpl,
-    styles: [myDpStyles],
+    templateUrl: './notifier-message.component.html',
+    styleUrls: ['./notifier-message.component.scss'],
     animations: [
         trigger('enterLeave', [
 
@@ -85,7 +79,7 @@ const myDpTpl: string = require("./notifier-message.component.html");
 })
 export class NotifierMessageComponent implements OnInit, OnDestroy {
 
-    @Input() notice: Notice;
+    @Input() public notice: Notice;
 
     private safeSvg: SafeHtml;
     private timerId: number = 0;
@@ -96,7 +90,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
                  private notifierService: NotifierService ) {
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.notice.icon);
         this.notice.state = this.notice.config.animate;
 
@@ -105,17 +99,17 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnDestroy() {
+    public ngOnDestroy() {
         this.clearTimer();
     }
 
-    animationDone( event: AnimationTransitionEvent ): void {
-        if (event.toState == this.notice.config.animate + 'Out') {
+    public animationDone( event: any ): void {
+        if (event.toState === this.notice.config.animate + 'Out') {
             this.notifierService.clear(this.notice);
         }
     }
 
-    onEnter(): void {
+    public onEnter(): void {
         if (this.notice.config.pauseOnHover) {
             this.timeLeft = this.notice.config.notifierLife;
             this.timeLeft -= new Date().getTime() - this.start;
@@ -123,7 +117,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         }
     }
 
-    onLeave(): void {
+    public onLeave(): void {
         if (this.notice.config.pauseOnHover) {
             if (!this.timeLeft) {
                 this.timeLeft = this.notice.config.notifierLife;
@@ -134,7 +128,7 @@ export class NotifierMessageComponent implements OnInit, OnDestroy {
         }
     }
 
-    onClick(): void {
+    public onClick(): void {
         if (this.notice.config.clickToClose) {
             this.setStateOut();
         }

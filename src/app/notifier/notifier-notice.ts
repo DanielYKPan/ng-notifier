@@ -2,16 +2,16 @@
  * notification.model
  */
 
-import { uuid } from "./uuid";
+import { uuid } from './uuid';
 
 export class Notice {
-    id: string;
-    type: string;
-    title: string;
-    content: string;
-    icon: string;
-    state: string;
-    config: any = {
+    public id: string;
+    public type: string;
+    public title: string;
+    public content: string;
+    public icon: string;
+    public state: string;
+    public config: any = {
         animate: 'fade',
         clickToClose: true,
         pauseOnHover: true,

@@ -2,33 +2,26 @@
  * notifier-container.component
  */
 
-import { Component, OnInit, OnDestroy, Optional } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Notice } from "./notifier-notice";
-import { ADD_NOTICE, REMOVE_NOTICE, REMOVE_ALL } from "./messages.reducer";
-import { Subscription } from "rxjs";
-import { NotifierOptions } from "./notifier-options.service";
-
-// webpack1_
-declare let require: any;
-const myDpStyles: string = require("./notifier-container.component.scss");
-const myDpTpl: string = require("./notifier-container.component.html");
-// webpack2_
+import { Component, OnInit, OnDestroy, Optional } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Notice } from './notifier-notice';
+import { ADD_NOTICE, REMOVE_NOTICE, REMOVE_ALL } from './messages.reducer';
+import { Subscription } from 'rxjs';
+import { NotifierOptions } from './notifier-options.service';
 
 @Component({
     selector: 'app-notifier-container',
-    template: myDpTpl,
-    styles: [myDpStyles],
+    templateUrl: './notifier-container.component.html',
+    styleUrls: ['./notifier-container.component.scss'],
 })
 
 export class NotifierContainerComponent implements OnInit, OnDestroy {
 
-    notices: Notice[];
-    maxStack: number = 5;
-    position: ['top' | 'bottom', 'right' | 'left' | 'center'] = ['bottom', 'right'];
+    public notices: Notice[];
+    public maxStack: number = 5;
+    public position: ['top' | 'bottom', 'right' | 'left' | 'center'] = ['bottom', 'right'];
 
     private selectNoticesSub: Subscription;
-
 
     constructor( private store: Store<Notice[]>,
                  @Optional() options: NotifierOptions ) {
@@ -37,21 +30,21 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.selectNoticesSub = this.store.select('messages').subscribe(
             ( data: Notice[] ) => this.notices = data
         );
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this.selectNoticesSub.unsubscribe();
     }
 
-    addNotice( notice: Notice ): void {
+    public addNotice( notice: Notice ): void {
         this.store.dispatch({type: ADD_NOTICE, payload: notice});
     }
 
-    removeNotice( notice?: Notice ): void {
+    public removeNotice( notice?: Notice ): void {
         if (notice) {
             this.store.dispatch({type: REMOVE_NOTICE, payload: notice});
         } else {
@@ -59,7 +52,7 @@ export class NotifierContainerComponent implements OnInit, OnDestroy {
         }
     }
 
-    anyNotices() {
+    public anyNotices() {
         return this.notices.length > 0;
     }
 }
