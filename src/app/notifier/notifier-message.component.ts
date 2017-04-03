@@ -3,12 +3,12 @@
  */
 
 import {
-    Component, OnInit, OnDestroy, Input, AnimationTransitionEvent, trigger, state,
-    transition, style, animate
+    Component, OnInit, OnDestroy, Input, AnimationTransitionEvent
 } from '@angular/core';
 import { Notice } from "./notifier-notice";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { NotifierService } from "./notifier.service";
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 // webpack1_
 declare let require: any;

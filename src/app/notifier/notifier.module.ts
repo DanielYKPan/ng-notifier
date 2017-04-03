@@ -12,12 +12,14 @@ import { MaxPipe } from "./max.pipe";
 import { NotifierService } from "./notifier.service";
 import { NotifierOptions } from "./notifier-options.service";
 import { NotifierContainerComponent } from "./notifier-container.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         StoreModule.provideStore({messages: messagesReducer}),
+        BrowserAnimationsModule,
     ],
     declarations: [
         NotifierContainerComponent,
